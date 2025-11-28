@@ -23,6 +23,12 @@ const initialTickets = [
     content: "This is the fourth ticket",
     status: "DONE" as const,
   },
+  {
+    id: "5",
+    title: "Ticket 5",
+    content: "This is the fifth ticket",
+    status: "IN_PROGRESS" as const,
+  },
 ];
 
 export default initialTickets;
