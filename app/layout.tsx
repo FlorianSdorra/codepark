@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { ticketsPath, homePath } from "@/paths";
-import Link from "next/link";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { Kanban } from "lucide-react";
+import { Header } from "@/components/header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,28 +28,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <nav
-          className="
-            flex justify-between 
-            supports-backdrop-blur:bg-background/60
-            fixed left-0 right-0 top-0 z-20 bg-background/95 backdrop-blur
-            w-full p-5 border-b"
-        >
-          <Button asChild variant={"ghost"}>
-            <Link href={homePath()}>
-              <Kanban />
-              <h1 className="text-lg font-bold">TicketBounty</h1>{" "}
-            </Link>
-            {/* as child property lets just the anchor tag appear in the DOM */}
-          </Button>
-          <Link
-            href={ticketsPath()}
-            className={buttonVariants({ variant: "default" })}
-          >
-            Tickets
-          </Link>
-          {/* same outcome, different approach */}
-        </nav>
+        <Header />
         <main
           className="
              min-h-screen flex-1 
