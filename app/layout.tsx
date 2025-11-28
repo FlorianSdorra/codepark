@@ -4,6 +4,7 @@ import "./globals.css";
 import { ticketsPath, homePath } from "@/paths";
 import Link from "next/link";
 import { Button, buttonVariants } from "@/components/ui/button";
+import { Kanban } from "lucide-react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,8 +38,11 @@ export default function RootLayout({
             fixed left-0 right-0 top-0 z-20 bg-background/95 backdrop-blur
             w-full p-5 border-b"
         >
-          <Button asChild variant={"outline"}>
-            <Link href={homePath()}>Home</Link>
+          <Button asChild variant={"ghost"}>
+            <Link href={homePath()}>
+              <Kanban />
+              <h1 className="text-lg font-bold">TicketBounty</h1>{" "}
+            </Link>
             {/* as child property lets just the anchor tag appear in the DOM */}
           </Button>
           <Link
