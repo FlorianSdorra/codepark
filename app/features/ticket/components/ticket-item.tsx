@@ -7,48 +7,42 @@ import {
   CardTitle,
   CardContent,
 } from "@/components/ui/card";
-import { CircleCheck, Pencil, FileText } from "lucide-react";
-
-const TICKET_ICONS = {
-  OPEN: <FileText />,
-  IN_PROGRESS: <Pencil />,
-  DONE: <CircleCheck />,
-};
-
-type Ticket = {
-  id: string;
-  title: string;
-  content: string;
-  status: "DONE" | "IN_PROGRESS" | "OPEN";
-};
+import { Ticket } from "@/app/features/ticket/types";
+import { TICKET_ICONS } from "@/app/features/ticket/constants";
+import { LucideSquareArrowOutUpRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 type TiketItemProps = {
   ticket: Ticket;
 };
 
 const TicketItem = ({ ticket }: TiketItemProps) => {
+  const detailButton = (
+    <Button variant={"outline"} asChild size={"icon"}>
+      <Link href={ticketPath(ticket.id)} className="text-sm font-bold">
+        <LucideSquareArrowOutUpRight />
+      </Link>
+    </Button>
+  );
+
   return (
-    <Card key={ticket.id} className="w-full max-w-[420px]">
-      <CardHeader>
-        <CardTitle className="flex gap-x-2">
-          <span>{TICKET_ICONS[ticket.status]}</span>
-          <span className="truncate text-xl">{ticket.title}</span>
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <span className="line-clamp-3 whitespace-break-spaces">
-          {ticket.content}
-        </span>
-      </CardContent>
-      <CardFooter>
-        <Link
-          href={ticketPath(ticket.id)}
-          className="text-sm font-bold underline"
-        >
-          View
-        </Link>
-      </CardFooter>
-    </Card>
+    <div className="flex w-full max-w-[420px] gap-x-1">
+      <Card key={ticket.id} className="w-full">
+        <CardHeader>
+          <CardTitle className="flex gap-x-2">
+            <span>{TICKET_ICONS[ticket.status]}</span>
+            <span className="truncate text-xl">{ticket.title}</span>
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <span className="line-clamp-3 whitespace-break-spaces">
+            {ticket.content}
+          </span>
+        </CardContent>
+        <CardFooter></CardFooter>
+      </Card>
+      <div className="flex flex-col gap-y-2">{detailButton}</div>
+    </div>
   );
 };
 
