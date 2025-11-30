@@ -1,4 +1,5 @@
 import Link from "next/link";
+import clsx from "clsx";
 import { ticketPath } from "@/paths";
 import {
   Card,
@@ -14,9 +15,10 @@ import { Button } from "@/components/ui/button";
 
 type TiketItemProps = {
   ticket: Ticket;
+  isDetail?: boolean;
 };
 
-const TicketItem = ({ ticket }: TiketItemProps) => {
+const TicketItem = ({ ticket, isDetail }: TiketItemProps) => {
   const detailButton = (
     <Button variant={"outline"} asChild size={"icon"}>
       <Link href={ticketPath(ticket.id)} className="text-sm font-bold">
@@ -26,7 +28,12 @@ const TicketItem = ({ ticket }: TiketItemProps) => {
   );
 
   return (
-    <div className="flex w-full max-w-[420px] gap-x-1">
+    <div
+      className={clsx("flex w-full gap-x-1 ", {
+        "max-w-[580]": isDetail,
+        "max-w-[420px]": !isDetail,
+      })}
+    >
       <Card key={ticket.id} className="w-full">
         <CardHeader>
           <CardTitle className="flex gap-x-2">
@@ -35,13 +42,38 @@ const TicketItem = ({ ticket }: TiketItemProps) => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <span className="line-clamp-3 whitespace-break-spaces">
+          <span
+            className={clsx("whitespace-break-spaces", {
+              "line-clamp-3": !isDetail,
+            })}
+          >
+            {ticket.content}
+            {ticket.content}
+            {ticket.content}
+            {ticket.content}
+            {ticket.content}
+            {ticket.content}
+            {ticket.content}
+            {ticket.content}
+            {ticket.content}
+            {ticket.content}
+            {ticket.content}
+            {ticket.content}
+            {ticket.content}
+            {ticket.content}
+            {ticket.content}
+            {ticket.content}
+            {ticket.content}
+            {ticket.content}
+            {ticket.content}
             {ticket.content}
           </span>
         </CardContent>
         <CardFooter></CardFooter>
       </Card>
-      <div className="flex flex-col gap-y-2">{detailButton}</div>
+      {isDetail ? null : (
+        <div className="flex flex-col gap-y-2">{detailButton}</div>
+      )}
     </div>
   );
 };
