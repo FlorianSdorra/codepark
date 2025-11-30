@@ -33,7 +33,7 @@ const TicketPage = async ({ params }: TicketPageProps) => {
   }
 
   return (
-    <div className="flex justify-center items-center fade-from-top">
+    <div className="flex justify-center items-center animate-fade-from-top">
       <TicketItem ticket={ticket} isDetail={true} />
     </div>
   );
