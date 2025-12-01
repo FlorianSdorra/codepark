@@ -27,7 +27,6 @@ const TicketPage = async ({ params }: TicketPageProps) => {
             </Button>
           }
         />
-        <Placeholder label="Ticket not found" />
       </div>
     );
   }
