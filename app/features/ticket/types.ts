@@ -1,4 +1,4 @@
-type TicketStatus = "DONE" | "IN_PROGRESS" | "OPEN";
+type TicketStatus = "CLOSED" | "IN_PROGRESS" | "OPEN";
 
 type Ticket = {
   id: string;
