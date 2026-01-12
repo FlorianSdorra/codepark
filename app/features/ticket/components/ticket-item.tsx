@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import clsx from "clsx";
 import { ticketPath } from "@/paths";
@@ -30,14 +28,12 @@ const TicketItem = ({ ticket, isDetail }: TiketItemProps) => {
     </Button>
   );
 
-  const handleDeleteTicket = async () => {
-    await deleteTicket(ticket.id);
-  };
-
   const deleteButton = (
-    <Button variant={"outline"} size={"icon"} onClick={handleDeleteTicket}>
-      <LucideTrash></LucideTrash>
-    </Button>
+    <form action={deleteTicket.bind(null, ticket.id) as unknown as string}>
+      <Button variant={"outline"} size={"icon"}>
+        <LucideTrash></LucideTrash>
+      </Button>
+    </form>
   );
 
   return (
