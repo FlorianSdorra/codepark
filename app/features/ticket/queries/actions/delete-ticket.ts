@@ -1,9 +1,15 @@
 "use server";
 
+import { redirect } from "next/navigation";
 import { prisma } from "../../../../../lib/prisma";
+import { ticketsPath } from "@/paths";
 
 export const deleteTicket = async (ticketId: string) => {
-  return await prisma.ticket.delete({
+  await prisma.ticket.delete({
     where: { id: ticketId },
   });
+
+  // TODO: Add flash message for successful deletion
+
+  redirect(ticketsPath());
 };
