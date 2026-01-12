@@ -8,7 +8,7 @@ import {
   CardTitle,
   CardContent,
 } from "@/components/ui/card";
-import { Ticket } from "@/app/features/ticket/types";
+import { Ticket } from "@/lib/generated/prisma/client";
 import { TICKET_ICONS } from "@/app/features/ticket/constants";
 import { LucideSquareArrowOutUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
