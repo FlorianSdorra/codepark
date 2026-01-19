@@ -1,6 +1,6 @@
 import Link from "next/link";
 import clsx from "clsx";
-import { ticketPath } from "@/paths";
+import { ticketPath, ticketEditPath } from "@/paths";
 import {
   Card,
   CardHeader,
@@ -10,7 +10,11 @@ import {
 } from "@/components/ui/card";
 import { Ticket } from "@/lib/generated/prisma/client";
 import { TICKET_ICONS } from "@/app/features/ticket/constants";
-import { LucideSquareArrowOutUpRight, LucideTrash } from "lucide-react";
+import {
+  LucideSquareArrowOutUpRight,
+  LucideTrash,
+  LucidePencil,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { deleteTicket } from "../queries/actions/delete-ticket";
 
@@ -36,6 +40,14 @@ const TicketItem = ({ ticket, isDetail }: TiketItemProps) => {
     </form>
   );
 
+  const editButton = (
+    <Button variant={"outline"} asChild size={"icon"}>
+      <Link href={ticketEditPath(ticket.id)}>
+        <LucidePencil className="h-4 w-4" />
+      </Link>
+    </Button>
+  );
+
   return (
     <div
       className={clsx("flex w-full gap-x-1 ", {
@@ -57,31 +69,19 @@ const TicketItem = ({ ticket, isDetail }: TiketItemProps) => {
             })}
           >
             {ticket.content}
-            {ticket.content}
-            {ticket.content}
-            {ticket.content}
-            {ticket.content}
-            {ticket.content}
-            {ticket.content}
-            {ticket.content}
-            {ticket.content}
-            {ticket.content}
-            {ticket.content}
-            {ticket.content}
-            {ticket.content}
-            {ticket.content}
-            {ticket.content}
-            {ticket.content}
-            {ticket.content}
-            {ticket.content}
-            {ticket.content}
-            {ticket.content}
           </span>
         </CardContent>
         <CardFooter></CardFooter>
       </Card>
       <div className="flex flex-col gap-y-2">
-        {isDetail ? deleteButton : detailButton}
+        {isDetail ? (
+          <>
+            {deleteButton}
+            {editButton}
+          </>
+        ) : (
+          detailButton
+        )}
       </div>
     </div>
   );
