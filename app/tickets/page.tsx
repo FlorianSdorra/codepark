@@ -3,7 +3,7 @@ import { Heading } from "@/components/heading";
 import { TicketList } from "../features/ticket/components/ticket-list";
 import { Spinner } from "@/components/spinner";
 import { CardCompact } from "@/components/card-compact";
-import TicketCreateForm from "../features/ticket/components/ticket-create-form";
+import { TicketUpsertForm } from "../features/ticket/components/ticket-upsert-form";
 
 const TicketsPage = () => {
   return (
@@ -12,7 +12,7 @@ const TicketsPage = () => {
       <CardCompact
         title="Create Ticket"
         description="A new Ticket will be created"
-        content={<TicketCreateForm />}
+        content={<TicketUpsertForm />}
       />
       <Suspense fallback={<Spinner />}>
         <TicketList />
