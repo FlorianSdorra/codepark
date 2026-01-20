@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { prisma } from "../../../../../lib/prisma";
-import { ticketsPath } from "@/paths";
+import { ticketPath, ticketsPath } from "@/paths";
 import { revalidatePath } from "next/cache";
 
 export const upsertTicket = async (
@@ -25,6 +25,6 @@ export const upsertTicket = async (
   revalidatePath(ticketsPath());
 
   if (id) {
-    redirect(ticketsPath());
+    redirect(ticketPath(id));
   }
 };
