@@ -13,7 +13,7 @@ const upsertTicketSchema = z.object({
 
 export const upsertTicket = async (
   id: string | undefined,
-  _actionState: { message: string },
+  _actionState: { message: string; payload?: FormData },
   formData: FormData
 ) => {
   try {
@@ -30,7 +30,10 @@ export const upsertTicket = async (
     });
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
-    return { message: "Failed to create or update the ticket." };
+    return {
+      message: "Failed to create or update the ticket.",
+      payload: formData,
+    };
   }
 
   revalidatePath(ticketsPath());
