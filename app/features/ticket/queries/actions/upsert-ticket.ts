@@ -7,6 +7,7 @@ import { revalidatePath } from "next/cache";
 
 export const upsertTicket = async (
   id: string | undefined,
+  actionState: { message: string },
   formData: FormData
 ) => {
   const data = {
@@ -27,4 +28,6 @@ export const upsertTicket = async (
   if (id) {
     redirect(ticketPath(id));
   }
+
+  return { message: "Ticket created successfully!" };
 };
