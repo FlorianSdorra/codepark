@@ -7,7 +7,7 @@ import { revalidatePath } from "next/cache";
 
 export const upsertTicket = async (
   id: string | undefined,
-  actionState: { message: string },
+  _actionState: { message: string },
   formData: FormData
 ) => {
   const data = {
