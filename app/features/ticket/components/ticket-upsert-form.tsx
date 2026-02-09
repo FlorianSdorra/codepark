@@ -15,7 +15,7 @@ type TicketUpsertFormProps = {
 const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
   const [actionState, action] = useActionState(
     upsertTicket.bind(null, ticket?.id),
-    { message: "" }
+    { message: "" },
   );
 
   return (

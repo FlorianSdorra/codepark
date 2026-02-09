@@ -1,10 +1,9 @@
 import { PrismaPg } from "@prisma/adapter-pg";
-
-import config from "../prisma.config";
+import "dotenv/config";
 import { PrismaClient } from "../lib/generated/prisma/client";
 
 const adapter = new PrismaPg({
-  connectionString: config.datasource?.url,
+  connectionString: process.env.DIRECT_URL as string,
 }); // Initialize the PostgreSQL adapter
 
 // const prisma = new PrismaClient({ adapter }); // Removed to implement singleton pattern

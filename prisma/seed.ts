@@ -1,10 +1,9 @@
 import { PrismaPg } from "@prisma/adapter-pg";
-
-import config from "../prisma.config";
+import "dotenv/config";
 import { PrismaClient, type Ticket } from "../lib/generated/prisma/client";
 
 const adapter = new PrismaPg({
-  connectionString: config.datasource?.url,
+  connectionString: process.env.DIRECT_URL as string,
 });
 
 const prisma = new PrismaClient({ adapter });

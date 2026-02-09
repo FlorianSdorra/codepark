@@ -5,6 +5,10 @@ import { prisma } from "../../../../../lib/prisma";
 import { ticketPath, ticketsPath } from "@/paths";
 import { revalidatePath } from "next/cache";
 import z from "zod";
+import {
+  ActionState,
+  fromErrorToActionState,
+} from "@/components/form/utils/to-action-state";
 
 const upsertTicketSchema = z.object({
   title: z.string().min(1).max(100),
@@ -13,8 +17,8 @@ const upsertTicketSchema = z.object({
 
 export const upsertTicket = async (
   id: string | undefined,
-  _actionState: { message: string; payload?: FormData },
-  formData: FormData
+  _actionState: ActionState,
+  formData: FormData,
 ) => {
   try {
     const data = upsertTicketSchema.parse({
@@ -28,12 +32,8 @@ export const upsertTicket = async (
       update: data,
       create: data,
     });
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
-    return {
-      message: "Failed to create or update the ticket.",
-      payload: formData,
-    };
+    return fromErrorToActionState(error, formData);
   }
 
   revalidatePath(ticketsPath());
