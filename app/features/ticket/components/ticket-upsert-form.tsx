@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { upsertTicket } from "../queries/actions/upsert-ticket";
 import { SubmitButton } from "@/components/form/submit-button";
 import { useActionState } from "react";
+import { FieldError } from "@/components/form/field-error";
 
 type TicketUpsertFormProps = {
   ticket?: Ticket;
@@ -15,7 +16,7 @@ type TicketUpsertFormProps = {
 const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
   const [actionState, action] = useActionState(
     upsertTicket.bind(null, ticket?.id),
-    { message: "" },
+    { message: "", fieldErrors: {} },
   );
 
   return (
@@ -29,6 +30,7 @@ const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
           (actionState.payload?.get("title") as string) ?? ticket?.title
         }
       />
+      <FieldError actionState={actionState} name="title" />
 
       <Label htmlFor="content">Content</Label>
       <Textarea
@@ -38,6 +40,9 @@ const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
           (actionState.payload?.get("content") as string) ?? ticket?.content
         }
       />
+      <span className="text-xs text-red-500">
+        <FieldError actionState={actionState} name="content" />
+      </span>
       <SubmitButton label={ticket ? "Update Ticket" : "Create Ticket"} />
       {actionState.message}
     </form>
