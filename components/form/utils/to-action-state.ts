@@ -22,7 +22,7 @@ export const fromErrorToActionState = (
   if (error instanceof ZodError) {
     return {
       status: "ERROR",
-      message: error.issues[0].message,
+      message: "",
       fieldErrors: flattenError(error).fieldErrors,
       payload: formData,
       timestamp: Date.now(),
