@@ -1,6 +1,7 @@
 "use client";
 
 import { Ticket } from "@/lib/generated/prisma/client";
+import { toast } from "sonner";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -23,10 +24,14 @@ const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
 
   useActionFeedback(actionState, {
     onSuccess: ({ actionState }) => {
-      console.log(actionState.message);
+      if (actionState.message) {
+        toast.success(actionState.message);
+      }
     },
     onError: ({ actionState }) => {
-      console.log(actionState.message);
+      if (actionState.message) {
+        toast.error(actionState.message);
+      }
     },
   });
 
@@ -55,7 +60,6 @@ const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
         <FieldError actionState={actionState} name="content" />
       </span>
       <SubmitButton label={ticket ? "Update Ticket" : "Create Ticket"} />
-      {actionState.message}
     </form>
   );
 };

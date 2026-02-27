@@ -18,7 +18,7 @@ const useActionFeedback = (
 
   useEffect(() => {
     const isUpdated = prevTimestamp.current !== actionState.timestamp;
-    if (!isUpdated) return; // to avoid calling onSuccess/onError on initial render
+    if (!isUpdated) return; // to avoid calling onSuccess/onError on initial render / react compiler will take care of this in future
 
     if (actionState.status === "SUCCESS") {
       options.onSuccess?.({ actionState });
