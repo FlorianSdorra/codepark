@@ -24,7 +24,7 @@ const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
   );
 
   return (
-    <Form action={action} actionState={actionState}>
+    <Form action={action} actionState={actionState} key={actionState.timestamp}>
       <Label htmlFor="title">Title</Label>
       <Input
         id="title"
