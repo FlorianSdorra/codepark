@@ -1,12 +1,14 @@
 import { Ticket } from "../../../../lib/generated/prisma/client";
-import { LucideMoreVertical, LucideTrash } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { LucideTrash } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuRadioItem,
+  DropdownMenuRadioGroup,
 } from "@/components/ui/dropdown-menu";
+import { TICKET_STATUS_LABELS } from "../constants";
 
 type TicketMoreMenuProps = {
   ticket: Ticket;
@@ -21,10 +23,23 @@ const TicketMoreMenu = ({ ticket, trigger }: TicketMoreMenuProps) => {
     </DropdownMenuItem>
   );
 
+  const TicketStatusRadioGroupItems = (
+    <DropdownMenuRadioGroup value={TICKET_STATUS_LABELS[ticket.status]}>
+      {Object.entries(TICKET_STATUS_LABELS).map(([key, value]) => (
+        <DropdownMenuRadioItem key={key} value={value}>
+          {value}
+        </DropdownMenuRadioItem>
+      ))}
+    </DropdownMenuRadioGroup>
+  );
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>{trigger}</DropdownMenuTrigger>
-      <DropdownMenuContent>{deleteButton}</DropdownMenuContent>
+      <DropdownMenuContent className="w-56" side="right">
+        {TicketStatusRadioGroupItems}
+        {deleteButton}
+      </DropdownMenuContent>
     </DropdownMenu>
   );
 };
