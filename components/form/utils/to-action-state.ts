@@ -16,7 +16,7 @@ export const EMPTY_ACTION_STATE: ActionState = {
 
 export const fromErrorToActionState = (
   error: unknown,
-  formData: FormData,
+  formData?: FormData,
 ): ActionState => {
   // if validation error with zod, return the first error message and the form data as payload
   if (error instanceof ZodError) {
