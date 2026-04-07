@@ -97,7 +97,7 @@ const TicketItem = ({ ticket, isDetail }: TiketItemProps) => {
           <>
             {deleteButton}
             {editButton}
-            {ticket.id && <TicketMoreMenu ticket={ticket} trigger={moreMenu} />}
+            {moreMenu}
           </>
         ) : (
           detailButton

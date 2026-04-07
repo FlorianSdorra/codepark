@@ -1,4 +1,6 @@
-import { Ticket } from "../../../../lib/generated/prisma/client";
+"use client";
+
+import { Ticket, TicketStatus } from "../../../../lib/generated/prisma/client";
 import { LucideTrash } from "lucide-react";
 import {
   DropdownMenu,
@@ -9,6 +11,8 @@ import {
   DropdownMenuRadioGroup,
 } from "@/components/ui/dropdown-menu";
 import { TICKET_STATUS_LABELS } from "../constants";
+import { updateTicketStatus } from "../queries/actions/update-ticket-status";
+import { toast } from "sonner";
 
 type TicketMoreMenuProps = {
   ticket: Ticket;
@@ -23,10 +27,23 @@ const TicketMoreMenu = ({ ticket, trigger }: TicketMoreMenuProps) => {
     </DropdownMenuItem>
   );
 
+  const handleTicketStatusUpdate = async (value: string) => {
+    const result = await updateTicketStatus(ticket.id, value as TicketStatus);
+
+    if (result.status === "ERROR") {
+      toast.error(result.message);
+    } else if (result.status === "SUCCESS") {
+      toast.success(result.message);
+    }
+  };
+
   const TicketStatusRadioGroupItems = (
-    <DropdownMenuRadioGroup value={TICKET_STATUS_LABELS[ticket.status]}>
+    <DropdownMenuRadioGroup
+      value={ticket.status}
+      onValueChange={handleTicketStatusUpdate}
+    >
       {Object.entries(TICKET_STATUS_LABELS).map(([key, value]) => (
-        <DropdownMenuRadioItem key={key} value={value}>
+        <DropdownMenuRadioItem key={key} value={key}>
           {value}
         </DropdownMenuRadioItem>
       ))}
