@@ -36,17 +36,9 @@ const TicketItem = ({ ticket, isDetail }: TiketItemProps) => {
     </Button>
   );
 
-  // const deleteButton = (
-  //   <form action={deleteTicket.bind(null, ticket.id) as unknown as string}>
-  //     <Button variant={"outline"} size={"icon"}>
-  //       <LucideTrash></LucideTrash>
-  //     </Button>
-  //   </form>
-  // );
-
   const deleteButton = (
     <ConfirmDialog
-      action={deleteTicket.bind(null, ticket.id) as unknown as string}
+      action={deleteTicket.bind(null, ticket.id)}
       trigger={
         <Button variant={"outline"} size={"icon"}>
           <LucideTrash className="h-4 w-4" />
